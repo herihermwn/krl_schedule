@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: SplashPage(),
       theme: appTheme,
+      debugShowCheckedModeBanner: false,
       navigatorKey: locator<NavigationService>().navigatorKey,
     );
   }
