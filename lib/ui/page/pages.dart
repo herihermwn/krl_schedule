@@ -12,3 +12,4 @@ import 'package:stacked/stacked.dart';
 
 // Child
 part 'splash_page.dart';
+part 'user_profilling_page.dart';

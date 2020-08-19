@@ -20,8 +20,18 @@ class SplashViewmodel extends FutureViewModel<String> {
     if (await isConnectToInternet()) {
       _message = "Mendapatkan jadwal...";
       notifyListeners();
+      await Future.delayed(Duration(seconds: 2));
+      await navigateToProfillingPage();
     } else {
       showErrorSnackbar("Periksa kembali koneksi anda");
     }
+  }
+
+  Future<void> navigateToProfillingPage() async {
+    await _navigationService.replaceWithTransition(
+      UserProfillingPage(),
+      transition: NavigationTransition.RightToLeftWithFade,
+      duration: Duration(seconds: 2),
+    );
   }
 }

@@ -6,6 +6,7 @@ part of 'shareds.dart';
 Color primaryColor = Color(0xFFFFF5757);
 Color accentColor = Color(0xFFF38B2AC);
 Color whiteColor = Colors.white;
+Color textColor = Color(0xFF747474);
 
 // ----------------------
 // Constant ThemeData
@@ -24,7 +25,7 @@ List<BoxShadow> boxShadowBottom = [
     color: Color(0xff747474).withOpacity(0.25),
     spreadRadius: 0,
     blurRadius: 8,
-    offset: Offset(0, 4), // changes position of shadow
+    offset: Offset(2, 4), // changes position of shadow
   ),
 ];
 
@@ -33,12 +34,22 @@ List<BoxShadow> boxShadowAbove = [
     color: Color(0xff747474).withOpacity(0.25),
     spreadRadius: 0,
     blurRadius: 8,
-    offset: Offset(0, -4), // changes position of shadow
+    offset: Offset(-2, -4), // changes position of shadow
   ),
 ];
 
 // -------------------
 // Assets Location
 // -------------------
-String svgAsset = "assets/svg";
+String svgAsset = "assets/icon";
 String imageAsset = "assets/images";
+
+// -------------------
+// AppBar
+// -------------------
+PreferredSize get getAppBar => PreferredSize(
+      preferredSize: Size.fromHeight(0),
+      child: AppBar(
+        brightness: Brightness.dark,
+      ),
+    );
