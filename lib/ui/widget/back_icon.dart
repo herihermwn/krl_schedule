@@ -11,13 +11,14 @@ class BackIcon extends StatelessWidget {
         Navigator.pop(parentContext);
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16),
-        padding: EdgeInsets.all(6),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+        margin: EdgeInsets.symmetric(
+          horizontal: Sizes.dp16(context),
+          vertical: Sizes.dp14(context),
+        ),
+        child: Icon(
+          Icons.arrow_back_ios,
           color: Colors.white,
         ),
-        child: Icon(Icons.arrow_back_ios, color: Colors.black54),
       ),
     );
   }

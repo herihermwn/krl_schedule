@@ -44,21 +44,21 @@ void setupSnackbar() {
 // ---------------------------
 // Error & Success Snackbar
 // ---------------------------
-void showErrorSnackbar(String message) {
+void showErrorSnackbar(String message, {int duration}) {
   _snackbarService.showCustomSnackBar(
     variant: SnackbarType.errorSnackbar,
     message: message,
     title: "Error",
-    duration: Duration(seconds: 2),
+    duration: Duration(seconds: duration ?? 2),
   );
 }
 
-void showSuccessSnackbar(String message) {
+void showSuccessSnackbar(String message, {int duration}) {
   _snackbarService.showCustomSnackBar(
     variant: SnackbarType.successSnackbar,
     message: message,
     title: "Success",
-    duration: Duration(seconds: 2),
+    duration: Duration(seconds: duration ?? 2),
   );
 }
 
@@ -98,7 +98,7 @@ Future showCustomSnackbarWithoutVarians(
     SnackPosition snackPosition = SnackPosition.BOTTOM,
     SnackStyle snackStyle = SnackStyle.FLOATING,
     Curve forwardAnimationCurve = Curves.easeOutCirc,
-    Curve reverseAnimationCurve = Curves.easeOutCirc,
+    Curve reverseAnimationCurve = Curves.linear,
     Duration animationDuration = const Duration(seconds: 1),
     SnackStatusCallback onStatusChanged,
     double barBlur = 0.0,
@@ -134,8 +134,6 @@ Future showCustomSnackbarWithoutVarians(
       progressIndicatorValueColor: progressIndicatorValueColor,
       snackPosition: snackPosition,
       snackStyle: snackStyle,
-      forwardAnimationCurve: forwardAnimationCurve,
-      reverseAnimationCurve: reverseAnimationCurve,
       animationDuration: animationDuration,
       onStatusChanged: onStatusChanged,
       barBlur: barBlur,

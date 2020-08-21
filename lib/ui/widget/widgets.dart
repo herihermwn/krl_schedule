@@ -14,7 +14,6 @@ part 'icon_additional_feature.dart';
 part 'text_format.dart';
 part 'banner_image.dart';
 part 'horizontal_line.dart';
-part 'tag_page.dart';
 part 'back_icon.dart';
 part 'input_field.dart';
 part 'action_button.dart';

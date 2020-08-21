@@ -1,43 +1,36 @@
 part of 'viewmodels.dart';
 
 class UserProfillingViewmodel extends BaseViewModel {
-  List<SelectedStation> selectedStation = [
-    SelectedStation(
-      stationId: "MRI",
-      stationName: "Manggarai",
-      reason: "Transit berangkat kerja",
-    ),
-    SelectedStation(
-      stationId: "PSM",
-      stationName: "Pasar Minggu",
-      reason: "Dekat dengan tempat tinggal",
-    ),
-    SelectedStation(
-      stationId: "KLD",
-      stationName: "Klender",
-      reason: "Dekat dengan tempat kerja",
-    ),
-    SelectedStation(
-      stationId: "DRN",
-      stationName: "Duren Kalibata",
-      reason: "Dekat tempat kuliah",
-    ),
-  ];
+  List<SelectedStation> selectStationList = [];
 
   Future<void> navigateToHomePage() async {
     // await _navigationService.replaceWithTransition(
-    //   UserProfillingPage(),
+    //   page(),
     //   transition: NavigationTransition.RightToLeftWithFade,
     //   duration: Duration(milliseconds: 500),
     // );
+    notifyListeners();
   }
 
   Future<void> removeStatiunList(int index) async {
-    selectedStation.removeAt(index);
+    selectStationList.removeAt(index);
     notifyListeners();
   }
 
   Future<void> addStatiunList() async {
+    if (selectStationList.length < 5) {
+      SelectedStation selectedStation =
+          await _navigationService.navigateWithTransition(
+        TambahStasiunPage(),
+        transition: NavigationTransition.RightToLeftWithFade,
+        duration: Duration(milliseconds: 300),
+      );
+      if (selectedStation != null) {
+        selectStationList.add(selectedStation);
+      }
+    } else {
+      showErrorSnackbar("Batas maksimal 5 stasiun");
+    }
     notifyListeners();
   }
 }

@@ -31,7 +31,7 @@ class SplashViewmodel extends FutureViewModel<String> {
     await _navigationService.replaceWithTransition(
       UserProfillingPage(),
       transition: NavigationTransition.RightToLeftWithFade,
-      duration: Duration(seconds: 2),
+      duration: Duration(milliseconds: 500),
     );
   }
 }

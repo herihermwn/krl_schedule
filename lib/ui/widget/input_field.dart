@@ -18,6 +18,7 @@ class InputField extends StatefulWidget {
   final bool isInputEnable;
   final Color textColor;
   final double textSize;
+  final Widget prefixIcon;
 
   InputField({
     @required this.controller,
@@ -29,6 +30,7 @@ class InputField extends StatefulWidget {
     this.maxLine,
     this.textColor,
     this.textSize,
+    this.prefixIcon,
   });
 
   @override
@@ -41,7 +43,8 @@ class InputField extends StatefulWidget {
         this.isInputEnable,
         this.maxLine,
         this.textColor,
-        this.textSize
+        this.textSize,
+        this.prefixIcon,
       );
 }
 
@@ -55,6 +58,7 @@ class _InputFieldState extends State<InputField> {
   final bool isEnable;
   final Color textColor;
   final double textSize;
+  final Widget prefixIcon;
 
   bool isValid = true;
   bool isObscureText = true;
@@ -70,6 +74,7 @@ class _InputFieldState extends State<InputField> {
     this.maxLine,
     this.textColor,
     this.textSize,
+    this.prefixIcon,
   );
 
   void setObsecureText() {
@@ -101,15 +106,19 @@ class _InputFieldState extends State<InputField> {
         });
       },
       decoration: InputDecoration(
+        filled: true,
+        fillColor: bgColor,
         labelText: hint ?? "",
         errorText: (isValid) ? null : errorMessage,
-        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),
+        border: OutlineInputBorder(borderSide: BorderSide(color: accentColor)),
+        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: accentColor)),
         errorStyle: TextStyle(
           color: Colors.red,
           fontSize: 12,
           fontWeight: FontWeight.bold,
           fontFamily: "OpenSans",
         ),
+        prefixIcon: prefixIcon ?? null,
         suffixIcon: (inputType == TextInputType.visiblePassword)
             ? GestureDetector(
                 onTap: setObsecureText,
@@ -117,7 +126,7 @@ class _InputFieldState extends State<InputField> {
                     ? Icon(MdiIcons.eye)
                     : Icon(MdiIcons.eyeOff),
               )
-            : SizedBox(),
+            : null,
       ),
     );
   }

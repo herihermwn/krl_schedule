@@ -1,11 +1,11 @@
 // ---------------
 // Barrel File
-// ---------------
-
 // ----------------
 // Import package
 // ----------------
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:krl_schedule/ui/shared/shareds.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 // --------
@@ -13,10 +13,10 @@ import 'package:stacked_services/stacked_services.dart';
 // --------
 part 'krl_service.dart';
 
-// ---------------------------------------------------------------------
-// Add new service here. Then run command
-// "flutter pub run build_runner build --delete-conflicting-outputs"
-// ---------------------------------------------------------------------
+/// ---------------------------------------------------------------------
+/// Add new service here. Then run command
+/// "flutter pub run build_runner build --delete-conflicting-outputs"
+/// ---------------------------------------------------------------------
 @module
 abstract class ServicesModule {
   @lazySingleton
@@ -25,4 +25,6 @@ abstract class ServicesModule {
   DialogService get dialogService;
   @lazySingleton
   SnackbarService get snackbarService;
+  @lazySingleton
+  KRLService get kRLService;
 }
