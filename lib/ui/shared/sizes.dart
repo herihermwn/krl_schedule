@@ -116,4 +116,84 @@ class Sizes {
   static dp30(BuildContext context) {
     return Sizes.width(context) / 13.8;
   }
+
+  static dp31(BuildContext context) {
+    return Sizes.width(context) / 13.3;
+  }
+
+  static dp32(BuildContext context) {
+    return Sizes.width(context) / 12.8;
+  }
+
+  static dp33(BuildContext context) {
+    return Sizes.width(context) / 12.3;
+  }
+
+  static dp34(BuildContext context) {
+    return Sizes.width(context) / 11.8;
+  }
+
+  static dp35(BuildContext context) {
+    return Sizes.width(context) / 11.3;
+  }
+
+  static dp36(BuildContext context) {
+    return Sizes.width(context) / 10.8;
+  }
+
+  static dp37(BuildContext context) {
+    return Sizes.width(context) / 10.3;
+  }
+
+  static dp38(BuildContext context) {
+    return Sizes.width(context) / 9.8;
+  }
+
+  static dp39(BuildContext context) {
+    return Sizes.width(context) / 9.3;
+  }
+
+  static dp40(BuildContext context) {
+    return Sizes.width(context) / 8.8;
+  }
+
+  static dp41(BuildContext context) {
+    return Sizes.width(context) / 8.3;
+  }
+
+  static dp42(BuildContext context) {
+    return Sizes.width(context) / 7.8;
+  }
+
+  static dp43(BuildContext context) {
+    return Sizes.width(context) / 7.3;
+  }
+
+  static dp44(BuildContext context) {
+    return Sizes.width(context) / 6.8;
+  }
+
+  static dp45(BuildContext context) {
+    return Sizes.width(context) / 6.3;
+  }
+
+  static dp46(BuildContext context) {
+    return Sizes.width(context) / 5.8;
+  }
+
+  static dp47(BuildContext context) {
+    return Sizes.width(context) / 5.3;
+  }
+
+  static dp48(BuildContext context) {
+    return Sizes.width(context) / 4.8;
+  }
+
+  static dp49(BuildContext context) {
+    return Sizes.width(context) / 4.3;
+  }
+
+  static dp50(BuildContext context) {
+    return Sizes.width(context) / 3.8;
+  }
 }

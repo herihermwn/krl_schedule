@@ -4,7 +4,6 @@ part of 'widgets.dart';
 ///
 /// * Function `onClick` must `Future<void> Function()`
 ///
-///
 class ActionButton extends StatefulWidget {
   final Future<void> Function() onClick;
   final Color buttonColor;
@@ -36,18 +35,18 @@ class _ActionButtonState extends State<ActionButton> {
   _ActionButtonState(this.onClick, this.buttonColor, this.textColor, this.text);
 
   bool isOnProgress = false;
+  bool onHover = false;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width / 20;
-    return RaisedButton(
-      color: (isOnProgress)
-          ? Colors.grey.withOpacity(0.5)
-          : buttonColor ?? Colors.green,
-      onPressed: () async {
+    return GestureDetector(
+      onTap: () async {
         if (!isOnProgress) {
           isOnProgress = true;
-          setState(() {});
+          setState(() {
+            onHover = false;
+          });
           onClick().whenComplete(() {
             setState(() {
               isOnProgress = false;
@@ -55,20 +54,45 @@ class _ActionButtonState extends State<ActionButton> {
           });
         }
       },
-      child: (isOnProgress)
-          ? SizedBox(
-              height: width,
-              width: width,
-              child: CircularProgressIndicator(
-                strokeWidth: 5,
-                backgroundColor: Colors.green,
+      onTapDown: (detail) {
+        setState(() {
+          onHover = true;
+        });
+      },
+      onTapCancel: () {
+        setState(() {
+          onHover = false;
+        });
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: Sizes.dp14(context),
+          horizontal: Sizes.dp24(context),
+        ),
+        decoration: BoxDecoration(
+          boxShadow: (onHover) ? [] : boxShadowBottom,
+          borderRadius: BorderRadius.circular(8),
+          color: (isOnProgress)
+              ? Colors.grey.withOpacity(0.5)
+              : buttonColor ?? Colors.green,
+        ),
+        child: (isOnProgress)
+            ? SizedBox(
+                height: width,
+                width: width,
+                child: CircularProgressIndicator(
+                  strokeWidth: 5,
+                  backgroundColor: Colors.green,
+                ),
+              )
+            : TextFormat(
+                text ?? "",
+                fontSize: Sizes.dp16(context),
+                fontColor: textColor ?? Colors.white,
+                textAlign: TextAlign.center,
+                fontWeight: FontWeight.w600,
               ),
-            )
-          : TextFormat(
-              text ?? "",
-              fontSize: 14,
-              fontColor: textColor ?? Colors.white,
-            ),
+      ),
     );
   }
 }
