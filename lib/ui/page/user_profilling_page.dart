@@ -8,7 +8,6 @@ class UserProfillingPage extends StatelessWidget {
       builder: (context, viewmodel, child) {
         return Scaffold(
           appBar: noAppBar,
-          backgroundColor: pageColor,
           body: Stack(
             children: [
               Align(
@@ -70,7 +69,7 @@ class TopUserProfilling extends ViewModelWidget<UserProfillingViewmodel> {
             fontWeight: FontWeight.w600,
           ),
           TextFormat(
-            "Untuk menampilkan jadwal terbaru\npada halaman home nanti\n(Maksimal 5 stasiun)",
+            "Untuk menampilkan jadwal terbaru\npada halaman home nanti\n(Maksimal 3 stasiun)",
             fontSize: Sizes.dp16(context),
             textAlign: TextAlign.start,
           ),

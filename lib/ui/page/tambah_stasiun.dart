@@ -8,7 +8,6 @@ class TambahStasiunPage extends StatelessWidget {
       builder: (context, viewmodel, child) {
         return Scaffold(
           appBar: noAppBar,
-          backgroundColor: pageColor,
           body: Stack(
             children: [
               Align(

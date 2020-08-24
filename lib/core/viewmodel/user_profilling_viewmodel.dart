@@ -4,12 +4,19 @@ class UserProfillingViewmodel extends BaseViewModel {
   List<SelectedStation> selectStationList = [];
 
   Future<void> navigateToHomePage() async {
-    // await _navigationService.replaceWithTransition(
-    //   page(),
-    //   transition: NavigationTransition.RightToLeftWithFade,
-    //   duration: Duration(milliseconds: 500),
-    // );
-    notifyListeners();
+    if (selectStationList.length != 0) {
+      await _sharedPrefService.saveToPref(
+        value: jsonEncode(selectStationList),
+        key: favStation,
+      );
+      // await _navigationService.replaceWithTransition(
+      //   page(),
+      //   transition: NavigationTransition.RightToLeftWithFade,
+      //   duration: Duration(milliseconds: 500),
+      // );
+    } else {
+      showErrorSnackbar("Anda belum menambahkan stasiun (minimal 1)");
+    }
   }
 
   Future<void> removeStatiunList(int index) async {
@@ -18,7 +25,7 @@ class UserProfillingViewmodel extends BaseViewModel {
   }
 
   Future<void> addStatiunList() async {
-    if (selectStationList.length < 5) {
+    if (selectStationList.length < 3) {
       SelectedStation selectedStation =
           await _navigationService.navigateWithTransition(
         TambahStasiunPage(),
@@ -29,7 +36,7 @@ class UserProfillingViewmodel extends BaseViewModel {
         selectStationList.add(selectedStation);
       }
     } else {
-      showErrorSnackbar("Batas maksimal 5 stasiun");
+      showErrorSnackbar("Batas maksimal 3 stasiun");
     }
     notifyListeners();
   }

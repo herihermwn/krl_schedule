@@ -40,6 +40,9 @@ dependencies:
   # Helper
   supercharged: ^1.10.0
 
+  # Security
+  flutter_secure_storage: ^3.3.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

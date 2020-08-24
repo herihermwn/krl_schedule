@@ -11,7 +11,6 @@ class SplashPage extends StatelessWidget {
         }
         return Scaffold(
           body: Container(
-            color: primaryColor,
             child: Stack(
               children: [
                 Align(
@@ -25,7 +24,7 @@ class SplashPage extends StatelessWidget {
                   alignment: Alignment(0, -0.1),
                   child: TextFormat(
                     "KRL Schedule",
-                    fontColor: whiteColor,
+                    fontColor: primaryColor,
                     fontSize: Sizes.dp22(context),
                     fontWeight: FontWeight.bold,
                   ),
@@ -37,8 +36,9 @@ class SplashPage extends StatelessWidget {
                     children: [
                       TextFormat(
                         viewmodel.getMessage,
-                        fontColor: whiteColor,
+                        fontColor: primaryColor,
                         fontSize: Sizes.dp16(context),
+                        fontWeight: FontWeight.w600,
                       ),
                       SizedBox(height: Sizes.dp14(context)),
                       CircularProgressIndicator(),
@@ -47,8 +47,9 @@ class SplashPage extends StatelessWidget {
                           ? SizedBox()
                           : TextFormat(
                               viewmodel.data,
-                              fontColor: whiteColor,
+                              fontColor: primaryColor,
                               fontSize: Sizes.dp14(context),
+                              fontWeight: FontWeight.w600,
                             ),
                     ],
                   ),

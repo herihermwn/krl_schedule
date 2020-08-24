@@ -8,7 +8,7 @@ Color accentColor = Color(0xFFF38B2AC);
 Color whiteColor = Colors.white;
 Color textColor = Color(0xFF747474);
 Color bgColor = Color(0xFFEEEEEE);
-Color pageColor = Color(0xFFF8F8F8);
+Color backgroundColor = Color(0xFFF8F8F8);
 
 // ----------------------
 // Constant ThemeData
@@ -17,6 +17,7 @@ ThemeData appTheme = ThemeData(
   primaryColor: primaryColor,
   accentColor: accentColor,
   textTheme: GoogleFonts.ralewayTextTheme(),
+  scaffoldBackgroundColor: backgroundColor,
 );
 
 // -------------------
@@ -63,4 +64,9 @@ final String apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEzODc4Iiwi
 final String baseUrl = "https://access.krl.co.id";
 
 final String stationNameList = "/c-access/access/nto/station";
+final String scheduleStation = "/c-access/access/api/schedule";
 
+// -----------------------
+// Constant Shared Keys
+// -----------------------
+final String favStation = "STATION_LIST";

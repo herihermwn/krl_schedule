@@ -3,6 +3,8 @@
 // ----------------
 // Import package
 // ----------------
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:krl_schedule/app/locator.dart';
@@ -13,6 +15,8 @@ import 'package:krl_schedule/ui/shared/shareds.dart';
 import 'package:package_info/package_info.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:supercharged/supercharged.dart';
+import 'package:intl/intl.dart';
 
 // --------
 // Child
@@ -28,6 +32,7 @@ part 'cari_stasiun_viewmodel.dart';
 final _navigationService = locator<NavigationService>();
 final _snackbarService = locator<SnackbarService>();
 final _krlService = locator<KRLService>();
+final _sharedPrefService = locator<SharedPreferenceService>();
 
 // ----------------
 // Navigator Key

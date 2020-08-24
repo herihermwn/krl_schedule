@@ -23,6 +23,8 @@ GetIt $initGetIt(
   gh.lazySingleton<DialogService>(() => servicesModule.dialogService);
   gh.lazySingleton<KRLService>(() => servicesModule.kRLService);
   gh.lazySingleton<NavigationService>(() => servicesModule.navigationService);
+  gh.lazySingleton<SharedPreferenceService>(
+      () => servicesModule.sharedPrefService);
   gh.lazySingleton<SnackbarService>(() => servicesModule.snackbarService);
   return get;
 }
@@ -34,6 +36,8 @@ class _$ServicesModule extends ServicesModule {
   KRLService get kRLService => KRLService();
   @override
   NavigationService get navigationService => NavigationService();
+  @override
+  SharedPreferenceService get sharedPrefService => SharedPreferenceService();
   @override
   SnackbarService get snackbarService => SnackbarService();
 }
