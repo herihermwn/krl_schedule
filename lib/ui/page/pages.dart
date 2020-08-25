@@ -12,11 +12,18 @@ import 'package:krl_schedule/ui/widget/widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:circular_check_box/circular_check_box.dart';
 
+// --------
 // Child
+// --------
 part 'splash_page.dart';
 part 'user_profilling_page.dart';
 part 'tambah_stasiun.dart';
 part 'cari_stasiun_snackbar.dart';
+// Home
+part 'home/main.dart';
+part 'home/home_page.dart';
+part 'home/pengaturan_page.dart';
+part 'home/pengingat_page.dart';
 
 // ----------
 // Template

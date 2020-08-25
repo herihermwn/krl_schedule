@@ -1,12 +1,25 @@
 part of '../models.dart';
 
-class KrlFailedResponse {
+class BaseResponse<T> {
+  String message;
+  bool status;
+  T result;
+
+  BaseResponse({
+    this.status,
+    this.message,
+    this.result,
+  });
+}
+
+
+class FailedResponse {
   bool status;
   String message;
 
-  KrlFailedResponse({this.status, this.message});
+  FailedResponse({this.status, this.message});
 
-  KrlFailedResponse.fromJson(Map<String, dynamic> json) {
+  FailedResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
   }

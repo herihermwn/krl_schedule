@@ -16,14 +16,16 @@ class SearchStasiunViewmodel extends FutureViewModel<void> {
   Future<void> init() async {
     // Get Station List
     if (await isConnectToInternet()) {
-      Response response = await _krlService.getStationList();
+      BaseResponse<List<SelectedStation>> result =
+          await _krlService.getStationList();
 
-      if (response.statusCode == 200) {
-        stationList = ((response.data as Map<String, dynamic>)["data"] as List)
-            .map((x) => SelectedStation.fromJson(x))
-            .toList();
+      if (result.status) {
+        stationList = result.result;
         backupStationList = stationList;
+      } else {
+        showErrorSnackbar(result.message);
       }
+      
     } else {
       showErrorSnackbar("Periksa kembali koneksi anda");
     }

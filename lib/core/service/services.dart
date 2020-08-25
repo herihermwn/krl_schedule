@@ -8,6 +8,7 @@ import 'package:dio/dio.dart';
 // ignore: implementation_imports
 import 'package:dio/src/options.dart' as dioOptions;
 import 'package:injectable/injectable.dart';
+import 'package:krl_schedule/core/model/models.dart';
 import 'package:krl_schedule/ui/shared/shareds.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

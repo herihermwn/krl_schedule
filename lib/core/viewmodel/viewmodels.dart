@@ -5,7 +5,6 @@
 // ----------------
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:krl_schedule/app/locator.dart';
 import 'package:krl_schedule/core/model/models.dart';
@@ -25,6 +24,11 @@ part 'splash_viewmodel.dart';
 part 'user_profilling_viewmodel.dart';
 part 'tambah_stasiun_viewmodel.dart';
 part 'cari_stasiun_viewmodel.dart';
+// Home
+part 'home/main_viewmodel.dart';
+part 'home/home_viewmodel.dart';
+part 'home/pengaturan_viewmodel.dart';
+part 'home/pengingat_viewmodel.dart';
 
 // ----------
 // Service
