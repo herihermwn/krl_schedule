@@ -1,15 +1,15 @@
 part of '../viewmodels.dart';
 
-class HomeViewmodel extends FutureViewModel<void> {
+// class MainHomeViewmodel extends FutureViewModel<void> {
   
-  @override
-  Future<void> futureToRun() => init();
+//   @override
+//   Future<void> futureToRun() => init();
 
-  Future<void> init() async {
+//   Future<void> init() async {
 
-  }
+//   }
 
-}
+// }
 
 //--------------------------
 // Home Bottom Navigation

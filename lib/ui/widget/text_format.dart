@@ -6,6 +6,7 @@ class TextFormat extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final TextAlign textAlign;
+  final FontStyle fontStyle;
 
   TextFormat(
     this.value, {
@@ -13,6 +14,7 @@ class TextFormat extends StatelessWidget {
     this.fontSize,
     this.fontWeight,
     this.textAlign,
+    this.fontStyle,
   });
 
   @override
@@ -25,6 +27,7 @@ class TextFormat extends StatelessWidget {
         color: fontColor ?? Colors.black87,
         fontSize: fontSize ?? 12,
         fontWeight: fontWeight ?? FontWeight.normal,
+        fontStyle: fontStyle ?? FontStyle.normal,
       ),
     );
   }

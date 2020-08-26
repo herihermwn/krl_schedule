@@ -61,6 +61,7 @@ class _CirculanButtonState extends State<CirculanButton> {
         });
       },
       child: Container(
+        margin: EdgeInsets.only(bottom: Sizes.dp10(context)),
         padding: EdgeInsets.all(Sizes.dp4(context)),
         decoration: BoxDecoration(
           boxShadow: (onHover) ? [] : boxShadowBottom,

@@ -15,3 +15,17 @@ Future<bool> isConnectToInternet() async {
     return false;
   }
 }
+
+Widget removeScrollEffect({Widget child}) {
+  return NotificationListener<OverscrollIndicatorNotification>(
+    onNotification: (overscroll) {
+      overscroll.disallowGlow();
+      return true;
+    },
+    child: child,
+  );
+}
+
+Widget conditionWidget({bool value, Widget onTrue, Widget onFalse}) {
+  return (value) ? onTrue : onFalse;
+}

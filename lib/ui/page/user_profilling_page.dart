@@ -18,7 +18,7 @@ class UserProfillingPage extends StatelessWidget {
                       TopUserProfilling(),
                       CenterUserProfilling(),
                       Visibility(
-                        visible: (viewmodel.selectStationList.length < 5)
+                        visible: (viewmodel.selectStationList.length < 3)
                             ? true
                             : false,
                         child: CirculanButton(
@@ -83,7 +83,7 @@ class CenterUserProfilling extends ViewModelWidget<UserProfillingViewmodel> {
   @override
   Widget build(BuildContext context, UserProfillingViewmodel viewModel) {
     return SizedBox(
-      height: Sizes.dp48(context) * viewModel.selectStationList.length,
+      height: Sizes.dp49(context) * viewModel.selectStationList.length,
       child: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (overscroll) {
           overscroll.disallowGlow();
@@ -180,7 +180,19 @@ Widget buildItemListStatsiun(
           ),
           child: Row(
             children: [
-              SvgPicture.asset("$svgAsset/TrainStationIcon.svg"),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  vertical: Sizes.dp8(context),
+                ),
+                margin: EdgeInsets.symmetric(
+                  horizontal: Sizes.dp6(context),
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: accentColor,
+                ),
+                child: SvgPicture.asset("$svgAsset/TrainStationIcon.svg"),
+              ),
               SizedBox(width: Sizes.dp16(context)),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -10,7 +10,7 @@ import 'package:krl_schedule/core/viewmodel/viewmodels.dart';
 import 'package:krl_schedule/ui/shared/shareds.dart';
 import 'package:krl_schedule/ui/widget/widgets.dart';
 import 'package:stacked/stacked.dart';
-import 'package:circular_check_box/circular_check_box.dart';
+import 'package:supercharged/supercharged.dart';
 
 // --------
 // Child

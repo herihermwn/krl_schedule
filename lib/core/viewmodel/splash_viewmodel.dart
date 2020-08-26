@@ -1,7 +1,7 @@
 part of 'viewmodels.dart';
 
 class SplashViewmodel extends FutureViewModel<String> {
-  String _message = "Memeriksa koneksi internet...";
+  String _message = "Menyiapkan aplikasi...";
 
   @override
   Future<String> futureToRun() => init();
@@ -17,30 +17,11 @@ class SplashViewmodel extends FutureViewModel<String> {
   String get getMessage => _message;
 
   Future<void> getToken() async {
+    await Future.delayed(Duration(seconds: 1));
     if (await _sharedPrefService.getFromPref(favStation) != null) {
-      if (await isConnectToInternet()) {
-        _message = "Mendapatkan jadwal...";
-        notifyListeners();
-        await Future.delayed(Duration(seconds: 1));
-        await replaceNavigate(HomePage());
-      } else {
-        showErrorSnackbar("Periksa kembali koneksi anda");
-      }
+      await replacePage(HomePage());
     } else {
-      _message = "Menyiapkan aplikasi...";
-      await Future.delayed(Duration(seconds: 1));
-      await replaceNavigate(UserProfillingPage());
+      await replacePage(UserProfillingPage());
     }
-  }
-
-  // -----------
-  // Navigator
-  // -----------
-  Future<void> replaceNavigate(Widget page) async {
-    await _navigationService.replaceWithTransition(
-      page,
-      transition: NavigationTransition.RightToLeftWithFade,
-      duration: Duration(milliseconds: 300),
-    );
   }
 }

@@ -6,9 +6,8 @@ class KRLService {
   // --------------------
   // Station Name Request
   // --------------------
-  Future<BaseResponse<List<SelectedStation>>> getStationList() async {
-    BaseResponse<List<SelectedStation>> result =
-        BaseResponse<List<SelectedStation>>();
+  Future<BaseResponse> getStationList() async {
+    BaseResponse result = BaseResponse<List<SelectedStation>>();
 
     // Request Http
     Response response = await dio.get(baseUrl + stationNameList);
@@ -30,13 +29,12 @@ class KRLService {
   // --------------------
   // Station Request
   // --------------------
-  Future<BaseResponse<ScheduleStationResponse>> getScheduleStation(
+  Future<BaseResponse> getScheduleStation(
     String station,
     String timeFrom,
     String timeTo,
   ) async {
-    BaseResponse<ScheduleStationResponse> result =
-        BaseResponse<ScheduleStationResponse>();
+    BaseResponse result = BaseResponse<ScheduleStationResponse>();
 
     // Request Http
     Response response = await dio.get(

@@ -6,4 +6,4 @@
 part 'selected_station.dart';
 // Response
 part 'response/schedule_station.dart';
-part 'response/base_responsel.dart';
+part 'response/base_response.dart';

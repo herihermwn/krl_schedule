@@ -42,3 +42,14 @@ final _sharedPrefService = locator<SharedPreferenceService>();
 // Navigator Key
 // ----------------
 GlobalKey<NavigatorState> _snackbarKey = _snackbarService.navigatorKey;
+
+// -----------
+// Navigator
+// -----------
+Future<void> replacePage(Widget page) async {
+  await _navigationService.replaceWithTransition(
+    page,
+    transition: NavigationTransition.RightToLeftWithFade,
+    duration: Duration(milliseconds: 500),
+  );
+}

@@ -9,6 +9,7 @@ Color whiteColor = Colors.white;
 Color textColor = Color(0xFF747474);
 Color bgColor = Color(0xFFEEEEEE);
 Color backgroundColor = Color(0xFFF8F8F8);
+Color yellowColor = Color(0XFFF9C12D); 
 
 // ----------------------
 // Constant ThemeData
