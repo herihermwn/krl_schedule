@@ -298,10 +298,7 @@ class StasiunList extends ViewModelWidget<HomeViewmodel> {
               Expanded(
                 flex: 1,
                 child: Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: Sizes.dp6(context),
-                    horizontal: Sizes.dp6(context),
-                  ),
+                  padding: EdgeInsets.all(Sizes.dp6(context)),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: schedule.cColor.toColor(),
