@@ -8,7 +8,7 @@ class TambahStasiunViewmodel extends BaseViewModel {
   Future<void> cariStasiun() async {
     showCustomSnackbarWithoutVarians(
       message: "",
-      titleText: SizedBox(),
+      titleText: SizedBox(height: 16),
       backgroundColor: whiteColor,
       overlayBlur: 0.1,
       padding: EdgeInsets.all(0),
