@@ -87,7 +87,7 @@ class SearchStasiun extends StatelessWidget {
               "Stasiun " + item.stationName,
               fontSize: Sizes.dp14(context),
               fontWeight: (isSelect) ? FontWeight.w600 : FontWeight.w400,
-              fontColor: (isSelect) ? whiteColor : textColor,
+              fontColor: (isSelect) ? whiteColor : darkTextColor,
             ),
           ],
         ),

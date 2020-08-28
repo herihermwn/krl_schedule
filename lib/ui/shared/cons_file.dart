@@ -6,9 +6,9 @@ part of 'shareds.dart';
 Color primaryColor = Color(0xFFFFF5757);
 Color accentColor = Color(0xFFF38B2AC);
 Color whiteColor = Colors.white;
-Color textColor = Color(0xFF747474);
-Color bgColor = Color(0xFFEEEEEE);
-Color backgroundColor = Color(0xFFF8F8F8);
+Color darkTextColor = Color(0xFF747474);
+Color inputBackgroundColor = Color(0xFFEEEEEE);
+Color scaffoldBackgroundColor = Color(0xFFF8F8F8);
 Color yellowColor = Color(0XFFF9C12D); 
 
 // ----------------------
@@ -17,8 +17,8 @@ Color yellowColor = Color(0XFFF9C12D);
 ThemeData appTheme = ThemeData(
   primaryColor: primaryColor,
   accentColor: accentColor,
-  textTheme: GoogleFonts.ralewayTextTheme(),
-  scaffoldBackgroundColor: backgroundColor,
+  textTheme: GoogleFonts.poppinsTextTheme(),
+  scaffoldBackgroundColor: scaffoldBackgroundColor,
 );
 
 // -------------------

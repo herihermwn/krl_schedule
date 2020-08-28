@@ -259,7 +259,7 @@ class StasiunList extends ViewModelWidget<HomeViewmodel> {
                 TextFormat(
                   station.reason,
                   fontSize: Sizes.dp13(context),
-                  fontColor: textColor,
+                  fontColor: darkTextColor,
                 ),
               ],
             ),

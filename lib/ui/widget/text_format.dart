@@ -23,7 +23,7 @@ class TextFormat extends StatelessWidget {
       value,
       textAlign: textAlign ?? TextAlign.start,
       softWrap: true,
-      style: GoogleFonts.raleway(
+      style: GoogleFonts.poppins(
         color: fontColor ?? Colors.black87,
         fontSize: fontSize ?? 12,
         fontWeight: fontWeight ?? FontWeight.normal,

@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
                 icon: SvgPicture.asset(
                   "$svgAsset/TrainNotif.svg",
                   color: (viewModel.currentIndex == 1) 
-                      ? primaryColor : textColor,
+                      ? primaryColor : darkTextColor,
                 ),
                 title: Text("Pengingat"),
               ),

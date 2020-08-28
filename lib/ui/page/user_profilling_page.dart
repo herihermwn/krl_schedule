@@ -192,7 +192,7 @@ Widget itemStatsiun(BuildContext context, SelectedStation selectedStation) {
                       fontSize: Sizes.dp14(context),
                       fontWeight: FontWeight.w600,
                       textAlign: TextAlign.start,
-                      fontColor: textColor,
+                      fontColor: darkTextColor,
                     ),
                   ),
                   SizedBox(
@@ -201,7 +201,7 @@ Widget itemStatsiun(BuildContext context, SelectedStation selectedStation) {
                       "${selectedStation.reason}",
                       fontSize: Sizes.dp12(context),
                       textAlign: TextAlign.start,
-                      fontColor: textColor,
+                      fontColor: darkTextColor,
                     ),
                   ),
                 ],

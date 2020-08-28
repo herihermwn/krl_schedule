@@ -107,7 +107,7 @@ class _InputFieldState extends State<InputField> {
       },
       decoration: InputDecoration(
         filled: true,
-        fillColor: bgColor,
+        fillColor: inputBackgroundColor,
         labelText: hint ?? "",
         errorText: (isValid) ? null : errorMessage,
         border: OutlineInputBorder(borderSide: BorderSide(color: accentColor)),
