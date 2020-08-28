@@ -29,3 +29,15 @@
         ├── page               # Page/UI File/class.
         ├── shared             # Custom function, extension, etc which can be used repeatedly on each method.
         └── widget             # Custom widget which can be used repeatedly.
+
+## 📁 Git commit format
+* Add
+Use when add new feature/update
+* Fix
+Use when fix some bug/error
+* Remove
+Use when remove some feature
+#### Example :
+    Add: Home page
+    Fix: Layout not responsive
+    Remove: Shadow on item list
