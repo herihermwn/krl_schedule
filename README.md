@@ -10,11 +10,7 @@
 
 ## 📸 Example Android
 <pre>
-<img src="screenshot/android1.jpg" width="200">
-<img src="screenshot/android2.jpg" width="200">
-<img src="screenshot/android3.jpg" width="200">
-<img src="screenshot/android4.jpg" width="200">
-<img src="screenshot/android5.jpg" width="200">
+<img src="screenshot/android1.jpg" width="200"> <img src="screenshot/android2.jpg" width="200"> <img src="screenshot/android3.jpg" width="200"> <img src="screenshot/android4.jpg" width="200"> <img src="screenshot/android5.jpg" width="200">
 </pre>
 
 ## 📁 Direktori
