@@ -10,18 +10,25 @@ import 'package:krl_schedule/core/viewmodel/viewmodels.dart';
 import 'package:krl_schedule/ui/shared/shareds.dart';
 import 'package:krl_schedule/ui/widget/widgets.dart';
 import 'package:stacked/stacked.dart';
-import 'package:circular_check_box/circular_check_box.dart';
+import 'package:supercharged/supercharged.dart';
 
+// --------
 // Child
+// --------
 part 'splash_page.dart';
 part 'user_profilling_page.dart';
 part 'tambah_stasiun.dart';
 part 'cari_stasiun_snackbar.dart';
+// Home Page
+part 'home/main.dart';
+part 'home/home_page.dart';
+part 'home/pengaturan_page.dart';
+part 'home/pengingat_page.dart';
 
 // ----------
 // Template
 // ----------
-Widget buildHeaderPage(
+Widget buildTitleHeader(
     {@required BuildContext context, @required String title}) {
   return Container(
     width: Sizes.width(context),

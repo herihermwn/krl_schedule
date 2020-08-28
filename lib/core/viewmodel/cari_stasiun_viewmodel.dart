@@ -16,34 +16,36 @@ class SearchStasiunViewmodel extends FutureViewModel<void> {
   Future<void> init() async {
     // Get Station List
     if (await isConnectToInternet()) {
-      Response response = await _krlService.getStationList();
-
-      if (response.statusCode == 200) {
-        stationList = ((response.data as Map<String, dynamic>)["data"] as List)
-            .map((x) => SelectedStation.fromJson(x))
-            .toList();
+      BaseResponse<List<SelectedStation>> result =
+          await _krlService.getStationList();
+      
+      // Check result
+      if (result.status) {
+        stationList = result.result;
         backupStationList = stationList;
+      } else {
+        showErrorSnackbar(result.message);
       }
     } else {
       showErrorSnackbar("Periksa kembali koneksi anda");
     }
 
-    // Create Listernet for controller
+    // add Listerner for controller
     queryController.addListener(filterStation);
   }
 
   void filterStation() {
     stationList = backupStationList;
-    List<SelectedStation> tmpStationList = [];
+    List<SelectedStation> tempStationList = [];
     for (int i = 0; i < stationList.length; i++) {
       if (stationList[i]
           .stationName
           .toLowerCase()
           .contains(queryController.text.toLowerCase())) {
-        tmpStationList.add(stationList[i]);
+        tempStationList.add(stationList[i]);
       }
     }
-    stationList = tmpStationList;
+    stationList = tempStationList;
     notifyListeners();
   }
 

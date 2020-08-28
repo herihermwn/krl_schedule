@@ -9,11 +9,11 @@ class UserProfillingViewmodel extends BaseViewModel {
         value: jsonEncode(selectStationList),
         key: favStation,
       );
-      // await _navigationService.replaceWithTransition(
-      //   page(),
-      //   transition: NavigationTransition.RightToLeftWithFade,
-      //   duration: Duration(milliseconds: 500),
-      // );
+      await _navigationService.replaceWithTransition(
+        HomePage(),
+        transition: NavigationTransition.RightToLeftWithFade,
+        duration: Duration(milliseconds: 300),
+      );
     } else {
       showErrorSnackbar("Anda belum menambahkan stasiun (minimal 1)");
     }

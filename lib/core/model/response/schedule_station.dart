@@ -2,16 +2,16 @@ part of '../models.dart';
 
 class ScheduleStationResponse {
   bool status;
-  List<Data> data;
+  List<ScheduleStationData> data;
 
   ScheduleStationResponse({this.status, this.data});
 
   ScheduleStationResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     if (json['data'] != null) {
-      data = List<Data>();
+      data = List<ScheduleStationData>();
       json['data'].forEach((v) {
-        data.add(Data.fromJson(v));
+        data.add(ScheduleStationData.fromJson(v));
       });
     }
   }
@@ -26,7 +26,7 @@ class ScheduleStationResponse {
   }
 }
 
-class Data {
+class ScheduleStationData {
   String kaId;
   String kaName;
   String routeName;
@@ -44,7 +44,7 @@ class Data {
   String fare;
   String distance;
 
-  Data(
+  ScheduleStationData(
       {this.kaId,
       this.kaName,
       this.routeName,
@@ -62,7 +62,7 @@ class Data {
       this.fare,
       this.distance});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  ScheduleStationData.fromJson(Map<String, dynamic> json) {
     kaId = json['ka_id'];
     kaName = json['ka_name'];
     routeName = json['route_name'];

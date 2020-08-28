@@ -5,7 +5,6 @@
 // ----------------
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:krl_schedule/app/locator.dart';
 import 'package:krl_schedule/core/model/models.dart';
@@ -25,6 +24,11 @@ part 'splash_viewmodel.dart';
 part 'user_profilling_viewmodel.dart';
 part 'tambah_stasiun_viewmodel.dart';
 part 'cari_stasiun_viewmodel.dart';
+// Home Viewmodel
+part 'home/main_viewmodel.dart';
+part 'home/home_viewmodel.dart';
+part 'home/pengaturan_viewmodel.dart';
+part 'home/pengingat_viewmodel.dart';
 
 // ----------
 // Service
@@ -38,3 +42,22 @@ final _sharedPrefService = locator<SharedPreferenceService>();
 // Navigator Key
 // ----------------
 GlobalKey<NavigatorState> _snackbarKey = _snackbarService.navigatorKey;
+
+// -----------
+// Navigator
+// -----------
+Future<void> replacePage(Widget page) async {
+  await _navigationService.replaceWithTransition(
+    page,
+    transition: NavigationTransition.RightToLeftWithFade,
+    duration: Duration(milliseconds: 500),
+  );
+}
+
+Future<void> movePage(Widget page) async {
+  await _navigationService.navigateWithTransition(
+    page,
+    transition: NavigationTransition.RightToLeftWithFade,
+    duration: Duration(milliseconds: 500),
+  );
+}

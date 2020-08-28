@@ -18,9 +18,7 @@ class UserProfillingPage extends StatelessWidget {
                       TopUserProfilling(),
                       CenterUserProfilling(),
                       Visibility(
-                        visible: (viewmodel.selectStationList.length < 5)
-                            ? true
-                            : false,
+                        visible: (viewmodel.selectStationList.length < 3),
                         child: CirculanButton(
                           onClick: viewmodel.addStatiunList,
                           buttonColor: accentColor,
@@ -83,12 +81,8 @@ class CenterUserProfilling extends ViewModelWidget<UserProfillingViewmodel> {
   @override
   Widget build(BuildContext context, UserProfillingViewmodel viewModel) {
     return SizedBox(
-      height: Sizes.dp48(context) * viewModel.selectStationList.length,
-      child: NotificationListener<OverscrollIndicatorNotification>(
-        onNotification: (overscroll) {
-          overscroll.disallowGlow();
-          return true;
-        },
+      height: Sizes.dp49(context) * viewModel.selectStationList.length,
+      child: removeScrollEffect(
         child: ListView.builder(
           itemCount: viewModel.selectStationList.length,
           itemBuilder: (context, index) {
@@ -97,14 +91,14 @@ class CenterUserProfilling extends ViewModelWidget<UserProfillingViewmodel> {
               direction: DismissDirection.endToStart,
               background: Container(
                 color: primaryColor,
-                child: _removeIcon(),
+                child: removeIcon(),
                 width: Sizes.width(context) / 2,
                 margin: EdgeInsets.symmetric(vertical: 2),
               ),
               onDismissed: (direction) {
                 viewModel.removeStatiunList(index);
               },
-              child: buildItemListStatsiun(
+              child: itemStatsiun(
                 context,
                 viewModel.selectStationList[index],
               ),
@@ -133,7 +127,7 @@ class BottomUserProfilling extends ViewModelWidget<UserProfillingViewmodel> {
   }
 }
 
-Widget _removeIcon() {
+Widget removeIcon() {
   return Stack(
     children: [
       Align(
@@ -156,8 +150,7 @@ Widget _removeIcon() {
   );
 }
 
-Widget buildItemListStatsiun(
-    BuildContext context, SelectedStation selectedStation) {
+Widget itemStatsiun(BuildContext context, SelectedStation selectedStation) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -180,7 +173,14 @@ Widget buildItemListStatsiun(
           ),
           child: Row(
             children: [
-              SvgPicture.asset("$svgAsset/TrainStationIcon.svg"),
+              Container(
+                padding: EdgeInsets.all(Sizes.dp6(context)),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: accentColor,
+                ),
+                child: SvgPicture.asset("$svgAsset/TrainStationIcon.svg"),
+              ),
               SizedBox(width: Sizes.dp16(context)),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

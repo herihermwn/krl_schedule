@@ -8,11 +8,13 @@ class TambahStasiunPage extends StatelessWidget {
       builder: (context, viewmodel, child) {
         return Scaffold(
           appBar: noAppBar,
+          // to avoid resize layout when keyboard appear
+          resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
               Align(
                 alignment: Alignment(0, -1),
-                child: buildHeaderPage(
+                child: buildTitleHeader(
                   context: context,
                   title: "Tambahkan Stasiun",
                 ),

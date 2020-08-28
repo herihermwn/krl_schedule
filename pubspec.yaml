@@ -35,7 +35,6 @@ dependencies:
   flutter_svg: ^0.18.0
   material_design_icons_flutter: ^4.0.5345
   package_info: ^0.4.1
-  circular_check_box: ^1.0.2
 
   # Helper
   supercharged: ^1.10.0

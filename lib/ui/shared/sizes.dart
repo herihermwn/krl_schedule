@@ -196,4 +196,32 @@ class Sizes {
   static dp50(BuildContext context) {
     return Sizes.width(context) / 3.8;
   }
+
+  static dp51(BuildContext context) {
+    return Sizes.width(context) / 3.3;
+  }
+
+  static dp52(BuildContext context) {
+    return Sizes.width(context) / 2.8;
+  }
+
+  static dp53(BuildContext context) {
+    return Sizes.width(context) / 2.3;
+  }
+
+  static dp54(BuildContext context) {
+    return Sizes.width(context) / 1.8;
+  }
+
+  static dp55(BuildContext context) {
+    return Sizes.width(context) / 1.3;
+  }
+
+  static dp56(BuildContext context) {
+    return Sizes.width(context) / 0.8;
+  }
+
+  static dp57(BuildContext context) {
+    return Sizes.width(context) / 0.3;
+  }
 }
