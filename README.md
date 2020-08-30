@@ -41,3 +41,5 @@ Use when remove some feature
     Add: Home page
     Fix: Layout not responsive
     Remove: Shadow on item list
+    
+#Enjoy!
