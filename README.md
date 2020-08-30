@@ -40,6 +40,4 @@ Use when remove some feature
 #### Example :
     Add: Home page
     Fix: Layout not responsive
-    Remove: Shadow on item list
-    
-#Enjoy!
+    Remove: Shadow on item list 
