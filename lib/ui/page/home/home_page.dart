@@ -33,6 +33,7 @@ class _HomeViewState extends State<HomeView>
                   bottom: TabBar(
                     tabs: viewmodel.tab,
                     indicatorWeight: 4,
+                    isScrollable: (viewmodel.stationList.length > 3),
                     indicatorColor: yellowColor,
                     labelPadding: EdgeInsets.symmetric(
                       vertical: 4,

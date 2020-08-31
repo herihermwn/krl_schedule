@@ -2,13 +2,11 @@ part of 'viewmodels.dart';
 
 class SearchStasiunViewmodel extends FutureViewModel<void> {
   List<SelectedStation> stationList;
-  List<SelectedStation> backupStationList;
+  List<SelectedStation> _backupStationList;
   TextEditingController queryController = TextEditingController();
-  SelectedStation currentStation;
+  List<SelectedStation> currentStation;
 
-  Function(SelectedStation) onChange;
-
-  SearchStasiunViewmodel(this.onChange, this.currentStation);
+  SearchStasiunViewmodel(this.currentStation);
 
   @override
   Future<void> futureToRun() => init();
@@ -18,11 +16,11 @@ class SearchStasiunViewmodel extends FutureViewModel<void> {
     if (await isConnectToInternet()) {
       BaseResponse<List<SelectedStation>> result =
           await _krlService.getStationList();
-      
+
       // Check result
       if (result.status) {
         stationList = result.result;
-        backupStationList = stationList;
+        _backupStationList = stationList;
       } else {
         showErrorSnackbar(result.message);
       }
@@ -34,8 +32,9 @@ class SearchStasiunViewmodel extends FutureViewModel<void> {
     queryController.addListener(filterStation);
   }
 
+  // Search station name
   void filterStation() {
-    stationList = backupStationList;
+    stationList = _backupStationList;
     List<SelectedStation> tempStationList = [];
     for (int i = 0; i < stationList.length; i++) {
       if (stationList[i]
@@ -49,10 +48,29 @@ class SearchStasiunViewmodel extends FutureViewModel<void> {
     notifyListeners();
   }
 
+  // action when item selected
   void selectStasiun(SelectedStation selectedStation) {
-    currentStation = selectedStation;
+    currentStation.add(selectedStation);
     notifyListeners();
-    onChange(currentStation);
     Navigator.pop(_snackbarKey.currentContext);
+  }
+
+  // action when has item selected
+  void itemHasSelected() {
+    showErrorSnackbar("Stasiun sudah di pilih");
+    Navigator.pop(_snackbarKey.currentContext);
+  }
+
+  // Check status station
+  bool checkStationId(int index) {
+    var id = stationList[index].stationId;
+    bool isSame = false;
+    for (int i = 0; i < currentStation.length; i++) {
+      if (id == currentStation[i].stationId) {
+        isSame = true;
+        break;
+      }
+    }
+    return isSame;
   }
 }

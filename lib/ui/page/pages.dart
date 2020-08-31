@@ -17,7 +17,6 @@ import 'package:supercharged/supercharged.dart';
 // --------
 part 'splash_page.dart';
 part 'user_profilling_page.dart';
-part 'tambah_stasiun.dart';
 part 'cari_stasiun_snackbar.dart';
 // Home Page
 part 'home/main.dart';

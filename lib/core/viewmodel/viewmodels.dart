@@ -22,7 +22,6 @@ import 'package:intl/intl.dart';
 // --------
 part 'splash_viewmodel.dart';
 part 'user_profilling_viewmodel.dart';
-part 'tambah_stasiun_viewmodel.dart';
 part 'cari_stasiun_viewmodel.dart';
 // Home Viewmodel
 part 'home/main_viewmodel.dart';

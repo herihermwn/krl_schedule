@@ -25,19 +25,27 @@ class UserProfillingViewmodel extends BaseViewModel {
   }
 
   Future<void> addStatiunList() async {
-    if (selectStationList.length < 3) {
-      SelectedStation selectedStation =
-          await _navigationService.navigateWithTransition(
-        TambahStasiunPage(),
-        transition: NavigationTransition.RightToLeftWithFade,
-        duration: Duration(milliseconds: 300),
-      );
-      if (selectedStation != null) {
-        selectStationList.add(selectedStation);
-      }
+    if (selectStationList.length < 5) {
+      cariStasiun();
     } else {
-      showErrorSnackbar("Batas maksimal 3 stasiun");
+      showErrorSnackbar("Batas maksimal 5 stasiun");
     }
     notifyListeners();
+  }
+
+  Future<void> cariStasiun() async {
+    showCustomSnackbarWithoutVarians(
+      message: "",
+      titleText: SizedBox(height: 16),
+      backgroundColor: whiteColor,
+      overlayBlur: 0.1,
+      padding: EdgeInsets.all(0),
+      boxShadows: boxShadowAbove,
+      messageText: SearchStasiun(
+        currentStation: selectStationList,
+      ),
+    ).whenComplete(() {
+      notifyListeners();
+    });
   }
 }
