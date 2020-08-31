@@ -1,26 +1,40 @@
 part of '../viewmodels.dart';
 
 class HomeViewmodel extends StreamViewModel<List<ScheduleStationResponse>> {
-  List<ScheduleStationResponse> get schedule => data;
+  final TickerProvider vsync;
   List<SelectedStation> stationList = [];
-  bool stationProses = false;
-  bool scheduleProses = false;
+
+  HomeViewmodel(this.vsync, this.stationList);
+
+  List<Widget> tab = [];
+  ScrollController scrollViewController;
+  TabController tabController;
+
+  // ---------
+  // Getter
+  // ---------
+  List<ScheduleStationResponse> get schedule => data ?? [];
+
+  @override
+  void initialise() {
+    for (final station in stationList) {
+      tab.add(builTab(station.stationName));
+    }
+    // Initial controller
+    scrollViewController = ScrollController();
+    tabController = TabController(vsync: vsync, length: stationList.length);
+    super.initialise();
+  }
 
   @override
   Stream<List<ScheduleStationResponse>> get stream => getScheduleStation();
 
   Stream<List<ScheduleStationResponse>> getScheduleStation() async* {
-    // Get station fav list
-    String stringJson = await _sharedPrefService.getFromPref(favStation);
-    stationList = (jsonDecode(stringJson) as List<dynamic>)
-        .map((x) => SelectedStation.fromJson(x))
-        .toList();
-
-    // Looping get schedule every 1 minute
+    // Looping get schedule every 20 seconds
     while (true) {
-      scheduleProses = false;
-      notifyListeners();
       List<ScheduleStationResponse> listSchedule = [];
+      yield listSchedule;
+
       String message;
 
       String fromTime = DateFormat.Hm().format(DateTime.now());
@@ -46,11 +60,15 @@ class HomeViewmodel extends StreamViewModel<List<ScheduleStationResponse>> {
         showErrorSnackbar(message);
       }
 
-      stationProses = true;
-      scheduleProses = true;
       yield listSchedule;
-      await Future.delayed(Duration(seconds: 30));
+      await Future.delayed(Duration(seconds: 20));
     }
   }
 
+  @override
+  void dispose() {
+    scrollViewController.dispose();
+    tabController.dispose();
+    super.dispose();
+  }
 }

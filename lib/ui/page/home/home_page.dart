@@ -1,21 +1,58 @@
 part of '../pages.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({Key key}) : super(key: key);
+class HomeView extends StatefulWidget {
+  final List<SelectedStation> stationList;
+  HomeView(this.stationList);
+
+  @override
+  _HomeViewState createState() => _HomeViewState(stationList);
+}
+
+class _HomeViewState extends State<HomeView>
+    with SingleTickerProviderStateMixin {
+  final List<SelectedStation> stationList;
+  _HomeViewState(this.stationList);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<HomeViewmodel>.nonReactive(
-      viewModelBuilder: () => HomeViewmodel(),
+    return ViewModelBuilder<HomeViewmodel>.reactive(
+      viewModelBuilder: () => HomeViewmodel(this, this.stationList),
       builder: (context, viewmodel, child) {
         return Scaffold(
           appBar: noAppBar,
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                HeaderHomePage(),
-                BodyHomePage(),
-              ],
+          body: NestedScrollView(
+            controller: viewmodel.scrollViewController,
+            headerSliverBuilder: (BuildContext context, bool isScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  flexibleSpace: HeaderHomePage(),
+                  expandedHeight: Sizes.dp51(context),
+                  pinned: true,
+                  excludeHeaderSemantics: true,
+                  forceElevated: isScrolled,
+                  bottom: TabBar(
+                    tabs: viewmodel.tab,
+                    indicatorWeight: 4,
+                    indicatorColor: yellowColor,
+                    labelPadding: EdgeInsets.symmetric(
+                      vertical: 4,
+                      horizontal: 4,
+                    ),
+                    controller: viewmodel.tabController,
+                  ),
+                ),
+              ];
+            },
+            body: condition(
+              value: viewmodel.schedule.isNotEmpty,
+              onTrue: BodyHomePage(),
+              onFalse: Center(
+                child: SizedBox(
+                  width: Sizes.dp32(context),
+                  height: Sizes.dp32(context),
+                  child: CircularProgressIndicator(),
+                ),
+              ),
             ),
           ),
         );
@@ -33,14 +70,6 @@ class HeaderHomePage extends ViewModelWidget<HomeViewmodel> {
       height: Sizes.dp51(context),
       margin: EdgeInsets.only(bottom: Sizes.dp12(context)),
       padding: EdgeInsets.only(top: Sizes.dp18(context)),
-      decoration: BoxDecoration(
-        color: primaryColor,
-        boxShadow: boxShadowBottom,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(Sizes.dp16(context)),
-          bottomRight: Radius.circular(Sizes.dp16(context)),
-        ),
-      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,21 +107,20 @@ class HeaderHomePage extends ViewModelWidget<HomeViewmodel> {
     return Column(
       children: [
         Container(
-          width: Sizes.dp42(context),
-          height: Sizes.dp42(context),
-          padding: EdgeInsets.all(8),
+          width: Sizes.dp34(context),
+          height: Sizes.dp34(context),
+          padding: EdgeInsets.all(4),
           child: SvgPicture.asset("$svgAsset/$svg"),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: whiteColor,
           ),
         ),
-        SizedBox(height: Sizes.dp8(context)),
+        SizedBox(height: Sizes.dp4(context)),
         TextFormat(
           title,
           fontColor: whiteColor,
-          fontSize: Sizes.dp15(context),
-          fontWeight: FontWeight.w500,
+          fontSize: Sizes.dp12(context),
         ),
       ],
     );
@@ -104,227 +132,103 @@ class BodyHomePage extends ViewModelWidget<HomeViewmodel> {
 
   @override
   Widget build(BuildContext context, HomeViewmodel viewmodel) {
+    return TabBarView(
+      controller: viewmodel.tabController,
+      children: viewmodel.schedule.map((e) => trainList(e.data)).toList(),
+    );
+  }
+
+  Widget trainList(List<ScheduleStationData> schedule) {
+    return (schedule != null)
+        ? ListView.builder(
+            itemCount: schedule.length,
+            itemBuilder: (context, index) {
+              return trainItem(schedule[index]);
+            },
+          )
+        : Center(
+            child: TextFormat("Jadwal kosong"),
+          );
+  }
+
+  Widget trainItem(ScheduleStationData schedule) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: Sizes.dp16(context)),
-      child: Column(
-        children: [
-          warningWidget(context),
-          SizedBox(height: Sizes.dp32(context)),
-          jadwalTerkini(context),
-        ],
+      margin: EdgeInsets.symmetric(
+        vertical: 12,
+        horizontal: 8,
       ),
-    );
-  }
-
-  Widget warningWidget(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          Icons.warning,
-          color: yellowColor,
-          size: Sizes.dp32(context),
-        ),
-        SizedBox(width: Sizes.dp16(context)),
-        SizedBox(
-          width: Sizes.width(context) / 1.4,
-          child: TextFormat(
-            "Selalu jaga jarak dan perhatikan barang bawaan anda",
-            fontColor: Colors.black87,
-            fontSize: Sizes.dp14(context),
-            fontWeight: FontWeight.bold,
-            fontStyle: FontStyle.italic,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget jadwalTerkini(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          width: Sizes.width(context),
-          child: TextFormat(
-            "Informasi jadwal terkini",
-            fontColor: Colors.black87,
-            fontSize: Sizes.dp14(context),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        StasiunList(),
-      ],
-    );
-  }
-}
-
-class StasiunList extends ViewModelWidget<HomeViewmodel> {
-  @override
-  Widget build(BuildContext context, HomeViewmodel viewmodel) {
-    return conditionWidget(
-      value: viewmodel.stationProses,
-      onFalse: CircularProgressIndicator(),
-      onTrue: SizedBox(
-        height: Sizes.height(context) / 3.3 * viewmodel.stationList.length,
-        child: removeScrollEffect(
-          child: ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: viewmodel.stationList.length,
-            itemBuilder: (c, i) {
-              return Column(
-                children: <Widget>[
-                  stasiunItem(
-                    station: viewmodel.stationList[i],
-                    context: context,
+      padding: EdgeInsets.symmetric(
+        vertical: 12,
+        horizontal: 8,
+      ),
+      decoration: BoxDecoration(
+        color: whiteColor,
+        borderRadius: BorderRadius.circular(4),
+        boxShadow: boxShadowBottom,
+      ),
+      child: Flex(
+        direction: Axis.horizontal,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Center(
+              child: Column(
+                children: [
+                  SvgPicture.asset(
+                    "$svgAsset/Train.svg",
+                    color: schedule.cColor.toColor(),
                   ),
-                  conditionWidget(
-                    value: viewmodel.scheduleProses,
-                    onFalse: CircularProgressIndicator(),
-                    onTrue: SizedBox(
-                      height: Sizes.dp51(context),
-                      width: Sizes.width(context),
-                      child: ListView.builder(
-                        itemCount: viewmodel.schedule[i].data.length,
-                        physics: ClampingScrollPhysics(),
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (c, j) {
-                          return trainItem(
-                            schedule: viewmodel.schedule[i].data[j],
-                            context: c,
-                          );
-                        },
-                      ),
+                  SizedBox(height: 4),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 2,
+                      horizontal: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: schedule.cColor.toColor(),
+                      borderRadius: BorderRadius.circular(4),
+                      boxShadow: boxShadowBottom,
+                    ),
+                    child: TextFormat(
+                      schedule.kaId,
+                      fontColor: whiteColor,
                     ),
                   ),
                 ],
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget stasiunItem({SelectedStation station, BuildContext context}) {
-    return Container(
-      margin: EdgeInsets.only(
-        left: Sizes.dp4(context),
-        right: Sizes.dp4(context),
-        top: Sizes.dp16(context),
-      ),
-      padding: EdgeInsets.symmetric(
-        horizontal: Sizes.dp8(context),
-        vertical: Sizes.dp12(context),
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
-        boxShadow: boxShadowBottom,
-        color: whiteColor,
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 3,
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                vertical: Sizes.dp8(context),
               ),
-              margin: EdgeInsets.symmetric(
-                horizontal: Sizes.dp6(context),
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: accentColor,
-              ),
-              child: SvgPicture.asset("$svgAsset/TrainStationIcon.svg"),
             ),
           ),
           Expanded(
-            flex: 1,
-            child: SizedBox(),
-          ),
-          Expanded(
-            flex: 15,
+            flex: 5,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                TextFormat("Tujuan"),
                 TextFormat(
-                  "Stasiun ${station.stationName}",
-                  fontSize: Sizes.dp14(context),
-                  fontColor: Colors.black87,
-                  fontWeight: FontWeight.w500,
+                  schedule.tujuan,
+                  fontWeight: FontWeight.w600,
                 ),
-                SizedBox(height: Sizes.dp4(context)),
+                TextFormat("Rute"),
                 TextFormat(
-                  station.reason,
-                  fontSize: Sizes.dp13(context),
-                  fontColor: darkTextColor,
+                  schedule.routeName,
+                  fontWeight: FontWeight.w600,
                 ),
               ],
             ),
           ),
           Expanded(
             flex: 3,
-            child: Icon(Icons.tune),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget trainItem({ScheduleStationData schedule, BuildContext context}) {
-    return Container(
-      width: Sizes.width(context) / 2.8,
-      margin: EdgeInsets.symmetric(
-        horizontal: Sizes.dp8(context),
-        vertical: Sizes.dp16(context),
-      ),
-      padding: EdgeInsets.symmetric(
-        horizontal: Sizes.dp8(context),
-        vertical: Sizes.dp4(context),
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
-        boxShadow: boxShadowBottom,
-        color: whiteColor,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                flex: 1,
-                child: Container(
-                  padding: EdgeInsets.all(Sizes.dp6(context)),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: schedule.cColor.toColor(),
-                  ),
-                  child: SvgPicture.asset("$svgAsset/TrainStationIcon.svg"),
+            child: Column(
+              children: [
+                TextFormat("Tiba dalam"),
+                TextFormat(
+                  differenceCurrentTime(schedule.waktuTiba),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
                 ),
-              ),
-              Expanded(
-                flex: 3,
-                child: TextFormat(
-                  schedule.routeName,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: Sizes.dp32(context),
-              vertical: Sizes.dp4(context),
+              ],
             ),
-            decoration: BoxDecoration(
-              color: yellowColor,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: TextFormat(schedule.waktuTiba),
           ),
         ],
       ),

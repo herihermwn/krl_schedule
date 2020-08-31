@@ -10,7 +10,7 @@ class UserProfillingViewmodel extends BaseViewModel {
         key: favStation,
       );
       await _navigationService.replaceWithTransition(
-        HomePage(),
+        HomePage(selectStationList),
         transition: NavigationTransition.RightToLeftWithFade,
         duration: Duration(milliseconds: 300),
       );

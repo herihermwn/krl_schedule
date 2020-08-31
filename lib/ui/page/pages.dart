@@ -61,3 +61,14 @@ Widget buildTitleHeader(
     ),
   );
 }
+
+Widget builTab(String title) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      SvgPicture.asset("$svgAsset/TrainStationIcon.svg"),
+      SizedBox(width: 4),
+      TextFormat(title, fontColor: whiteColor, fontSize: 10,),
+    ],
+  );
+}

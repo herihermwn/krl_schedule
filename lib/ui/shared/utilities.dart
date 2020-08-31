@@ -26,6 +26,16 @@ Widget removeScrollEffect({Widget child}) {
   );
 }
 
-Widget conditionWidget({bool value, Widget onTrue, Widget onFalse}) {
+dynamic condition({bool value, dynamic onTrue, dynamic onFalse}) {
   return (value) ? onTrue : onFalse;
+}
+
+String differenceCurrentTime(String time) {
+  List<String> timeArray = time.split(":");
+
+  final now = DateTime.now();
+  final dateTime = DateTime(now.year, now.month, now.day,
+      int.parse(timeArray[0]), int.parse(timeArray[1]));
+
+  return "${dateTime.difference(now).inMinutes} Menit";
 }
