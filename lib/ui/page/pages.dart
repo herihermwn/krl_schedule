@@ -17,7 +17,6 @@ import 'package:supercharged/supercharged.dart';
 // --------
 part 'splash_page.dart';
 part 'user_profilling_page.dart';
-part 'tambah_stasiun.dart';
 part 'cari_stasiun_snackbar.dart';
 // Home Page
 part 'home/main.dart';
@@ -59,5 +58,16 @@ Widget buildTitleHeader(
         ),
       ],
     ),
+  );
+}
+
+Widget builTab(String title) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      SvgPicture.asset("$svgAsset/TrainStationIcon.svg"),
+      SizedBox(width: 4),
+      TextFormat(title, fontColor: whiteColor, fontSize: 10,),
+    ],
   );
 }

@@ -1,15 +1,14 @@
 part of 'pages.dart';
 
 class SearchStasiun extends StatelessWidget {
-  final Function(SelectedStation) onChange;
-  final SelectedStation currentStation;
+  final List<SelectedStation> currentStation;
 
-  SearchStasiun({this.onChange, this.currentStation});
+  SearchStasiun({this.currentStation});
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SearchStasiunViewmodel>.reactive(
-      viewModelBuilder: () => SearchStasiunViewmodel(onChange, currentStation),
+      viewModelBuilder: () => SearchStasiunViewmodel(currentStation),
       builder: (context, viewmodel, child) {
         return Container(
           color: whiteColor,
@@ -43,15 +42,7 @@ class SearchStasiun extends StatelessWidget {
                       child: removeScrollEffect(
                         child: ListView.builder(
                           itemCount: viewmodel.stationList.length,
-                          itemBuilder: (c, i) => _buildStatiunItemList(
-                            c,
-                            viewmodel.stationList[i],
-                            viewmodel.selectStasiun,
-                            (viewmodel.currentStation != null)
-                                ? (viewmodel.stationList[i].stationId ==
-                                    viewmodel.currentStation.stationId)
-                                : false,
-                          ),
+                          itemBuilder: (c, i) => StatiunItemList(i),
                         ),
                       ),
                     ),
@@ -61,12 +52,27 @@ class SearchStasiun extends StatelessWidget {
       },
     );
   }
+}
 
-  Widget _buildStatiunItemList(BuildContext context, SelectedStation item,
-      Function(SelectedStation item) onClick, bool isSelect) {
+class StatiunItemList extends ViewModelWidget<SearchStasiunViewmodel> {
+  final int index;
+
+  StatiunItemList(this.index);
+
+  @override
+  Widget build(BuildContext context, SearchStasiunViewmodel viewmodel) {
+    bool isSelect = (viewmodel.currentStation != null)
+        ? viewmodel.checkStationId(index)
+        : false;
+    SelectedStation item = viewmodel.stationList[index];
+
     return GestureDetector(
       onTap: () {
-        onClick(item);
+        if (isSelect) {
+          viewmodel.itemHasSelected();
+        } else {
+          viewmodel.selectStasiun(item);
+        }
       },
       child: Container(
         padding: EdgeInsets.symmetric(

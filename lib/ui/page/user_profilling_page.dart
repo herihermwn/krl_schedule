@@ -18,7 +18,7 @@ class UserProfillingPage extends StatelessWidget {
                       TopUserProfilling(),
                       CenterUserProfilling(),
                       Visibility(
-                        visible: (viewmodel.selectStationList.length < 3),
+                        visible: (viewmodel.selectStationList.length < 5),
                         child: CirculanButton(
                           onClick: viewmodel.addStatiunList,
                           buttonColor: accentColor,
@@ -67,7 +67,7 @@ class TopUserProfilling extends ViewModelWidget<UserProfillingViewmodel> {
             fontWeight: FontWeight.w600,
           ),
           TextFormat(
-            "Untuk menampilkan jadwal terbaru\npada halaman home nanti\n(Maksimal 3 stasiun)",
+            "Untuk menampilkan jadwal terbaru\npada halaman home nanti\n(Maksimal 5 stasiun)",
             fontSize: Sizes.dp16(context),
             textAlign: TextAlign.start,
           ),
@@ -81,7 +81,7 @@ class CenterUserProfilling extends ViewModelWidget<UserProfillingViewmodel> {
   @override
   Widget build(BuildContext context, UserProfillingViewmodel viewModel) {
     return SizedBox(
-      height: Sizes.dp49(context) * viewModel.selectStationList.length,
+      height: Sizes.dp47(context) * viewModel.selectStationList.length,
       child: removeScrollEffect(
         child: ListView.builder(
           itemCount: viewModel.selectStationList.length,
@@ -182,29 +182,15 @@ Widget itemStatsiun(BuildContext context, SelectedStation selectedStation) {
                 child: SvgPicture.asset("$svgAsset/TrainStationIcon.svg"),
               ),
               SizedBox(width: Sizes.dp16(context)),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: Sizes.width(context) / 1.8,
-                    child: TextFormat(
-                      "Stasiun ${selectedStation.stationName}",
-                      fontSize: Sizes.dp14(context),
-                      fontWeight: FontWeight.w600,
-                      textAlign: TextAlign.start,
-                      fontColor: darkTextColor,
-                    ),
-                  ),
-                  SizedBox(
-                    width: Sizes.width(context) / 1.8,
-                    child: TextFormat(
-                      "${selectedStation.reason}",
-                      fontSize: Sizes.dp12(context),
-                      textAlign: TextAlign.start,
-                      fontColor: darkTextColor,
-                    ),
-                  ),
-                ],
+              SizedBox(
+                width: Sizes.width(context) / 1.8,
+                child: TextFormat(
+                  "Stasiun ${selectedStation.stationName}",
+                  fontSize: Sizes.dp14(context),
+                  fontWeight: FontWeight.w600,
+                  textAlign: TextAlign.start,
+                  fontColor: darkTextColor,
+                ),
               ),
             ],
           ),
