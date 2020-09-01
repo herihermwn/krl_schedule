@@ -26,20 +26,22 @@ class _HomeViewState extends State<HomeView>
               return <Widget>[
                 SliverAppBar(
                   flexibleSpace: HeaderHomePage(),
-                  expandedHeight: Sizes.dp51(context),
+                  collapsedHeight: Sizes.dp47(context),
                   pinned: true,
-                  excludeHeaderSemantics: true,
                   forceElevated: isScrolled,
                   bottom: TabBar(
                     tabs: viewmodel.tab,
-                    indicatorWeight: 4,
-                    isScrollable: (viewmodel.stationList.length > 3),
-                    indicatorColor: yellowColor,
-                    labelPadding: EdgeInsets.symmetric(
-                      vertical: 4,
-                      horizontal: 4,
-                    ),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    isScrollable: true,
                     controller: viewmodel.tabController,
+                    labelPadding: EdgeInsets.symmetric(
+                      horizontal: Sizes.width(context) / (4 * viewmodel.stationList.length),
+                    ),
+                    indicator: BubbleTabIndicator(
+                      insets: EdgeInsets.symmetric(vertical: -4),
+                      indicatorColor: accentColor,
+                      tabBarIndicatorSize: TabBarIndicatorSize.tab,
+                    ),
                   ),
                 ),
               ];
@@ -129,7 +131,6 @@ class HeaderHomePage extends ViewModelWidget<HomeViewmodel> {
 }
 
 class BodyHomePage extends ViewModelWidget<HomeViewmodel> {
-  BodyHomePage() : super(reactive: false);
 
   @override
   Widget build(BuildContext context, HomeViewmodel viewmodel) {

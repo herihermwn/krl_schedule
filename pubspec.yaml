@@ -35,7 +35,7 @@ dependencies:
   flutter_svg: ^0.18.0
   material_design_icons_flutter: ^4.0.5345
   package_info: ^0.4.1
-  extended_tabs: ^0.2.3
+  bubble_tab_indicator: ^0.1.4
 
   # Helper
   supercharged: ^1.10.0

@@ -3,6 +3,7 @@
 // ---------------
 
 // Import package
+import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:krl_schedule/core/model/models.dart';
@@ -62,12 +63,5 @@ Widget buildTitleHeader(
 }
 
 Widget builTab(String title) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      SvgPicture.asset("$svgAsset/TrainStationIcon.svg"),
-      SizedBox(width: 4),
-      TextFormat(title, fontColor: whiteColor, fontSize: 10,),
-    ],
-  );
+  return Tab(text: title,);
 }

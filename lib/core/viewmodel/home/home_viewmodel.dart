@@ -30,11 +30,10 @@ class HomeViewmodel extends StreamViewModel<List<ScheduleStationResponse>> {
   Stream<List<ScheduleStationResponse>> get stream => getScheduleStation();
 
   Stream<List<ScheduleStationResponse>> getScheduleStation() async* {
-    // Looping get schedule every 20 seconds
+    // Looping get schedule every 30 seconds
     while (true) {
       List<ScheduleStationResponse> listSchedule = [];
-      yield listSchedule;
-
+      
       String message;
 
       String fromTime = DateFormat.Hm().format(DateTime.now());
@@ -61,7 +60,8 @@ class HomeViewmodel extends StreamViewModel<List<ScheduleStationResponse>> {
       }
 
       yield listSchedule;
-      await Future.delayed(Duration(seconds: 20));
+      notifyListeners();
+      await Future.delayed(Duration(seconds: 30));
     }
   }
 

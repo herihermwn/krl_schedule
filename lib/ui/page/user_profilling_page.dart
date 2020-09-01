@@ -98,13 +98,104 @@ class CenterUserProfilling extends ViewModelWidget<UserProfillingViewmodel> {
               onDismissed: (direction) {
                 viewModel.removeStatiunList(index);
               },
-              child: itemStatsiun(
-                context,
-                viewModel.selectStationList[index],
-              ),
+              child: ItemStation(index),
             );
           },
         ),
+      ),
+    );
+  }
+
+  Widget removeIcon() {
+    return Stack(
+      children: [
+        Align(
+          alignment: Alignment(0.2, 0),
+          child: Icon(
+            Icons.clear,
+            color: whiteColor,
+          ),
+        ),
+        Align(
+          alignment: Alignment(0.5, 0),
+          child: TextFormat(
+            "Hapus",
+            fontColor: whiteColor,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ItemStation extends ViewModelWidget<UserProfillingViewmodel> {
+  final int index;
+  ItemStation(this.index, {Key key}) : super(key: key, reactive: false);
+
+  @override
+  Widget build(BuildContext context, UserProfillingViewmodel viewModel) {
+    return Container(
+      padding: EdgeInsets.all(Sizes.dp12(context)),
+      margin: EdgeInsets.symmetric(
+        vertical: Sizes.dp8(context),
+        horizontal: Sizes.dp24(context),
+      ),
+      decoration: BoxDecoration(
+        color: whiteColor,
+        boxShadow: boxShadowBottom,
+        borderRadius: BorderRadius.circular(4)
+      ),
+      child: Flex(
+        direction: Axis.horizontal,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            flex: 1,
+            child: Container(
+              padding: EdgeInsets.all(Sizes.dp6(context)),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: accentColor,
+              ),
+              child: SvgPicture.asset("$svgAsset/TrainStationIcon.svg"),
+            ),
+          ),
+          Expanded(
+            flex: 7,
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: Sizes.dp12(context),
+                vertical: Sizes.dp6(context),
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: TextFormat(
+                "Stasiun ${viewModel.selectStationList[index].stationName}",
+                fontSize: 15,
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 1,
+            child: GestureDetector(
+              onTap: () async => viewModel.removeStatiunList(index),
+              child: Container(
+                padding: EdgeInsets.all(Sizes.dp6(context)),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: primaryColor,
+                ),
+                child: Icon(
+                  Icons.clear,
+                  color: whiteColor,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -125,98 +216,4 @@ class BottomUserProfilling extends ViewModelWidget<UserProfillingViewmodel> {
       ),
     );
   }
-}
-
-Widget removeIcon() {
-  return Stack(
-    children: [
-      Align(
-        alignment: Alignment(0.2, 0),
-        child: Icon(
-          Icons.clear,
-          color: whiteColor,
-        ),
-      ),
-      Align(
-        alignment: Alignment(0.5, 0),
-        child: TextFormat(
-          "Hapus",
-          fontColor: whiteColor,
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ],
-  );
-}
-
-Widget itemStatsiun(BuildContext context, SelectedStation selectedStation) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Flexible(
-        flex: 17,
-        child: Container(
-          margin: EdgeInsets.only(
-            left: Sizes.dp32(context),
-            top: Sizes.dp10(context),
-            bottom: Sizes.dp10(context),
-          ),
-          padding: EdgeInsets.symmetric(
-            vertical: Sizes.dp12(context),
-            horizontal: Sizes.dp16(context),
-          ),
-          decoration: BoxDecoration(
-            color: whiteColor,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: boxShadowBottom,
-          ),
-          child: Row(
-            children: [
-              Container(
-                padding: EdgeInsets.all(Sizes.dp6(context)),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: accentColor,
-                ),
-                child: SvgPicture.asset("$svgAsset/TrainStationIcon.svg"),
-              ),
-              SizedBox(width: Sizes.dp16(context)),
-              SizedBox(
-                width: Sizes.width(context) / 1.8,
-                child: TextFormat(
-                  "Stasiun ${selectedStation.stationName}",
-                  fontSize: Sizes.dp14(context),
-                  fontWeight: FontWeight.w600,
-                  textAlign: TextAlign.start,
-                  fontColor: darkTextColor,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      Flexible(
-        flex: 2,
-        child: SizedBox(),
-      ),
-      Flexible(
-        flex: 1,
-        child: Container(
-          decoration: BoxDecoration(
-            color: primaryColor,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(8),
-              bottomLeft: Radius.circular(8),
-            ),
-          ),
-          padding: EdgeInsets.symmetric(vertical: Sizes.dp8(context)),
-          child: Icon(
-            Icons.arrow_left,
-            color: whiteColor,
-          ),
-        ),
-      )
-    ],
-  );
 }
