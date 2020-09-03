@@ -1,14 +1,12 @@
 part of 'pages.dart';
 
 class SearchStasiun extends StatelessWidget {
-  final List<SelectedStation> currentStation;
-
-  SearchStasiun({this.currentStation});
+  SearchStasiun();
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SearchStasiunViewmodel>.reactive(
-      viewModelBuilder: () => SearchStasiunViewmodel(currentStation),
+      viewModelBuilder: () => SearchStasiunViewmodel(),
       builder: (context, viewmodel, child) {
         return Container(
           color: whiteColor,
@@ -46,6 +44,14 @@ class SearchStasiun extends StatelessWidget {
                         ),
                       ),
                     ),
+              RaisedButton(
+                color: accentColor,
+                child: TextFormat(
+                  "Tambahkan",
+                  fontColor: whiteColor,
+                ),
+                onPressed: viewmodel.saveItem,
+              ),
             ],
           ),
         );
@@ -69,9 +75,9 @@ class StatiunItemList extends ViewModelWidget<SearchStasiunViewmodel> {
     return GestureDetector(
       onTap: () {
         if (isSelect) {
-          viewmodel.itemHasSelected();
+          viewmodel.removeItem(item.stationId);
         } else {
-          viewmodel.selectStasiun(item);
+          viewmodel.addItem(item);
         }
       },
       child: Container(

@@ -4,7 +4,7 @@ class HomeViewmodel extends StreamViewModel<List<ScheduleStationResponse>> {
   final TickerProvider vsync;
   List<SelectedStation> stationList = [];
 
-  HomeViewmodel(this.vsync, this.stationList);
+  HomeViewmodel(this.vsync);
 
   List<Widget> tab = [];
   ScrollController scrollViewController;
@@ -17,9 +17,12 @@ class HomeViewmodel extends StreamViewModel<List<ScheduleStationResponse>> {
 
   @override
   void initialise() {
+    stationList = _tempData.getValue(selectedStationKey);
+
     for (final station in stationList) {
       tab.add(builTab(station.stationName));
     }
+
     // Initial controller
     scrollViewController = ScrollController();
     tabController = TabController(vsync: vsync, length: stationList.length);
@@ -33,14 +36,14 @@ class HomeViewmodel extends StreamViewModel<List<ScheduleStationResponse>> {
     // Looping get schedule every 30 seconds
     while (true) {
       List<ScheduleStationResponse> listSchedule = [];
-      
+
       String message;
 
-      String fromTime = DateFormat.Hm().format(DateTime.now());
-      String toTimeHour = 1.hours.fromNow().hour.toString().padLeft(2, "0");
-      String toTimeMinute = 1.hours.fromNow().minute.toString().padLeft(2, "0");
-
       for (int i = 0; i < stationList.length; i++) {
+        String fromTime = DateFormat.Hm().format(DateTime.now());
+        String toTimeHour = 1.hours.fromNow().hour.toString().padLeft(2, "0");
+        String toTimeMinute = 1.hours.fromNow().minute.toString().padLeft(2, "0");
+
         BaseResponse<ScheduleStationResponse> response =
             await _krlService.getScheduleStation(
           stationList[i].stationId,

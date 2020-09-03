@@ -6,12 +6,13 @@ class SearchStasiunViewmodel extends FutureViewModel<void> {
   TextEditingController queryController = TextEditingController();
   List<SelectedStation> currentStation;
 
-  SearchStasiunViewmodel(this.currentStation);
+  SearchStasiunViewmodel();
 
   @override
   Future<void> futureToRun() => init();
 
   Future<void> init() async {
+    currentStation = _tempData.getValue(selectedStationKey);
     // Get Station List
     if (await isConnectToInternet()) {
       BaseResponse<List<SelectedStation>> result =
@@ -23,9 +24,11 @@ class SearchStasiunViewmodel extends FutureViewModel<void> {
         _backupStationList = stationList;
       } else {
         showErrorSnackbar(result.message);
+        Navigator.pop(_snackbarKey.currentContext);
       }
     } else {
       showErrorSnackbar("Periksa kembali koneksi anda");
+      Navigator.pop(_snackbarKey.currentContext);
     }
 
     // add Listerner for controller
@@ -49,15 +52,29 @@ class SearchStasiunViewmodel extends FutureViewModel<void> {
   }
 
   // action when item selected
-  void selectStasiun(SelectedStation selectedStation) {
-    currentStation.add(selectedStation);
-    notifyListeners();
-    Navigator.pop(_snackbarKey.currentContext);
+  void addItem(SelectedStation selectedStation) {
+    if (currentStation.length < 5) {
+      currentStation.add(selectedStation);
+      notifyListeners();
+    } else {
+      showErrorSnackbar("Maksimal 5 stasiun");
+      Navigator.pop(_snackbarKey.currentContext);
+    }
   }
 
   // action when has item selected
-  void itemHasSelected() {
-    showErrorSnackbar("Stasiun sudah di pilih");
+  void removeItem(String id) {
+    for (int i = 0; i < currentStation.length; i++) {
+      if (id == currentStation[i].stationId) {
+        currentStation.removeAt(i);
+        notifyListeners();
+        break;
+      }
+    }
+  }
+
+  void saveItem() {
+    _tempData.updateValue(selectedStationKey, currentStation);
     Navigator.pop(_snackbarKey.currentContext);
   }
 

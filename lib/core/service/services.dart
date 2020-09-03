@@ -18,6 +18,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 // --------
 part 'krl_service.dart';
 part 'shared_preference_service.dart';
+part 'temp_service.dart';
 
 /// ---------------------------------------------------------------------
 /// Add new service here. Then run command
@@ -35,4 +36,6 @@ abstract class ServicesModule {
   KRLService get kRLService;
   @lazySingleton
   SharedPreferenceService get sharedPrefService;
+  @lazySingleton
+  TempDataService get tempService;
 }

@@ -20,7 +20,7 @@ class UserProfillingPage extends StatelessWidget {
                       Visibility(
                         visible: (viewmodel.selectStationList.length < 5),
                         child: CirculanButton(
-                          onClick: viewmodel.addStatiunList,
+                          onClick: viewmodel.addItem,
                           buttonColor: accentColor,
                           child: Icon(
                             Icons.add,
@@ -96,7 +96,7 @@ class CenterUserProfilling extends ViewModelWidget<UserProfillingViewmodel> {
                 margin: EdgeInsets.symmetric(vertical: 2),
               ),
               onDismissed: (direction) {
-                viewModel.removeStatiunList(index);
+                viewModel.removeItem(index);
               },
               child: ItemStation(index),
             );
@@ -181,7 +181,7 @@ class ItemStation extends ViewModelWidget<UserProfillingViewmodel> {
           Flexible(
             flex: 1,
             child: GestureDetector(
-              onTap: () async => viewModel.removeStatiunList(index),
+              onTap: () async => viewModel.removeItem(index),
               child: Container(
                 padding: EdgeInsets.all(Sizes.dp6(context)),
                 decoration: BoxDecoration(

@@ -1,22 +1,16 @@
 part of '../pages.dart';
 
 class HomeView extends StatefulWidget {
-  final List<SelectedStation> stationList;
-  HomeView(this.stationList);
-
   @override
-  _HomeViewState createState() => _HomeViewState(stationList);
+  _HomeViewState createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView>
     with SingleTickerProviderStateMixin {
-  final List<SelectedStation> stationList;
-  _HomeViewState(this.stationList);
-
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewmodel>.reactive(
-      viewModelBuilder: () => HomeViewmodel(this, this.stationList),
+      viewModelBuilder: () => HomeViewmodel(this),
       builder: (context, viewmodel, child) {
         return Scaffold(
           appBar: noAppBar,
