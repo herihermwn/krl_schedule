@@ -7,10 +7,13 @@ class UserProfillingViewmodel extends BaseViewModel {
     if (selectStationList.length != 0) {
       await _sharedPrefService.saveToPref(
         value: jsonEncode(selectStationList),
-        key: favStation,
+        key: selectedStationKey,
       );
+
+      _tempData.saveValue(selectedStationKey, selectStationList);
+
       await _navigationService.replaceWithTransition(
-        HomePage(selectStationList),
+        HomePage(),
         transition: NavigationTransition.RightToLeftWithFade,
         duration: Duration(milliseconds: 300),
       );
@@ -19,12 +22,12 @@ class UserProfillingViewmodel extends BaseViewModel {
     }
   }
 
-  Future<void> removeStatiunList(int index) async {
+  Future<void> removeItem(int index) async {
     selectStationList.removeAt(index);
     notifyListeners();
   }
 
-  Future<void> addStatiunList() async {
+  Future<void> addItem() async {
     if (selectStationList.length < 5) {
       cariStasiun();
     } else {
@@ -34,6 +37,8 @@ class UserProfillingViewmodel extends BaseViewModel {
   }
 
   Future<void> cariStasiun() async {
+    _tempData.saveValue(selectedStationKey, selectStationList);
+
     showCustomSnackbarWithoutVarians(
       message: "",
       titleText: SizedBox(height: 16),
@@ -41,10 +46,9 @@ class UserProfillingViewmodel extends BaseViewModel {
       overlayBlur: 0.1,
       padding: EdgeInsets.all(0),
       boxShadows: boxShadowAbove,
-      messageText: SearchStasiun(
-        currentStation: selectStationList,
-      ),
+      messageText: SearchStasiun(),
     ).whenComplete(() {
+      selectStationList = _tempData.getValue(selectedStationKey);
       notifyListeners();
     });
   }

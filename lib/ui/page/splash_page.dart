@@ -43,14 +43,16 @@ class SplashPage extends StatelessWidget {
                       SizedBox(height: Sizes.dp14(context)),
                       CircularProgressIndicator(),
                       SizedBox(height: Sizes.dp14(context)),
-                      (viewmodel.isBusy)
-                          ? SizedBox()
-                          : TextFormat(
-                              viewmodel.data,
-                              fontColor: primaryColor,
-                              fontSize: Sizes.dp14(context),
-                              fontWeight: FontWeight.w600,
-                            ),
+                      condition(
+                        value: viewmodel.isBusy,
+                        onTrue: SizedBox(),
+                        onFalse: TextFormat(
+                          viewmodel.data,
+                          fontColor: primaryColor,
+                          fontSize: Sizes.dp14(context),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
                     ],
                   ),
                 ),

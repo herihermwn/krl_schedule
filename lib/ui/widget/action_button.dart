@@ -39,7 +39,6 @@ class _ActionButtonState extends State<ActionButton> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width / 20;
     return GestureDetector(
       onTap: () async {
         if (!isOnProgress) {
@@ -64,34 +63,32 @@ class _ActionButtonState extends State<ActionButton> {
           onHover = false;
         });
       },
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: Sizes.dp14(context),
-          horizontal: Sizes.dp24(context),
+      child: condition(
+        value: isOnProgress,
+        onTrue: Container(
+          margin: EdgeInsets.symmetric(horizontal: Sizes.dp47(context)),
+          child: CircularProgressIndicator(),
         ),
-        decoration: BoxDecoration(
-          boxShadow: (onHover) ? [] : boxShadowBottom,
-          borderRadius: BorderRadius.circular(8),
-          color: (isOnProgress)
-              ? Colors.grey.withOpacity(0.5)
-              : buttonColor ?? Colors.green,
+        onFalse: Container(
+          padding: EdgeInsets.symmetric(
+            vertical: Sizes.dp14(context),
+            horizontal: Sizes.dp24(context),
+          ),
+          decoration: BoxDecoration(
+            boxShadow: (onHover) ? [] : boxShadowBottom,
+            borderRadius: BorderRadius.circular(8),
+            color: (isOnProgress)
+                ? Colors.grey.withOpacity(0.5)
+                : buttonColor ?? Colors.green,
+          ),
+          child: TextFormat(
+            text ?? "",
+            fontSize: Sizes.dp16(context),
+            fontColor: textColor ?? Colors.white,
+            textAlign: TextAlign.center,
+            fontWeight: FontWeight.w600,
+          ),
         ),
-        child: (isOnProgress)
-            ? SizedBox(
-                height: width,
-                width: width,
-                child: CircularProgressIndicator(
-                  strokeWidth: 5,
-                  backgroundColor: Colors.green,
-                ),
-              )
-            : TextFormat(
-                text ?? "",
-                fontSize: Sizes.dp16(context),
-                fontColor: textColor ?? Colors.white,
-                textAlign: TextAlign.center,
-                fontWeight: FontWeight.w600,
-              ),
       ),
     );
   }

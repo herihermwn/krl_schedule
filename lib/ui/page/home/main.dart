@@ -1,9 +1,6 @@
 part of '../pages.dart';
 
 class HomePage extends StatelessWidget {
-  final List<SelectedStation> stationList;
-  HomePage(this.stationList);
-
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeNav>.reactive(
@@ -47,7 +44,7 @@ class HomePage extends StatelessWidget {
   Widget getView(int index) {
     switch (index) {
       case 0:
-        return HomeView(stationList);
+        return HomeView();
         break;
       case 1:
         return PengingatView();
@@ -56,7 +53,7 @@ class HomePage extends StatelessWidget {
         return PengaturanView();
         break;
       default:
-        return HomeView(stationList);
+        return HomeView();
     }
   }
 }

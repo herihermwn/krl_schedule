@@ -18,14 +18,17 @@ class SplashViewmodel extends FutureViewModel<String> {
 
   Future<void> getToken() async {
     // Get station fav list
-    String stringJson = await _sharedPrefService.getFromPref(favStation);
+    String stringJson = await _sharedPrefService.getFromPref(selectedStationKey);
     await Future.delayed(Duration(seconds: 1));
     if (stringJson != null) {
       List<SelectedStation> stationList =
           (jsonDecode(stringJson) as List<dynamic>)
               .map((x) => SelectedStation.fromJson(x))
               .toList();
-      await replacePage(HomePage(stationList));
+
+      _tempData.saveValue(selectedStationKey, stationList);
+
+      await replacePage(HomePage());
     } else {
       await replacePage(UserProfillingPage());
     }

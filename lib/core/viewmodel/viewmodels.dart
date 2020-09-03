@@ -36,6 +36,7 @@ final _navigationService = locator<NavigationService>();
 final _snackbarService = locator<SnackbarService>();
 final _krlService = locator<KRLService>();
 final _sharedPrefService = locator<SharedPreferenceService>();
+final _tempData = locator<TempDataService>();
 
 // ----------------
 // Navigator Key

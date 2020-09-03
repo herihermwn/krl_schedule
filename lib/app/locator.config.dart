@@ -26,6 +26,7 @@ GetIt $initGetIt(
   gh.lazySingleton<SharedPreferenceService>(
       () => servicesModule.sharedPrefService);
   gh.lazySingleton<SnackbarService>(() => servicesModule.snackbarService);
+  gh.lazySingleton<TempDataService>(() => servicesModule.tempService);
   return get;
 }
 
@@ -40,4 +41,6 @@ class _$ServicesModule extends ServicesModule {
   SharedPreferenceService get sharedPrefService => SharedPreferenceService();
   @override
   SnackbarService get snackbarService => SnackbarService();
+  @override
+  TempDataService get tempService => TempDataService();
 }
